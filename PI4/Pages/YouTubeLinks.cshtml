@@ -19,7 +19,28 @@
     </header>
 
 
-    <h1>JEMOEDER</h1>
+    <table class="table">
+        <tr>
+            <th><a asp-route-sortOrder="@Model.TitelSort">Titel</a></th>
+            <th>Link</th>
+        </tr>
+        @foreach (var titel in Model.videos)
+        {
+            <tr>
+                <td>@titel.Titel</td>
+                <td class="align-middle embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="@titel.Link" allowfullscreen=""></iframe></td>
+                    <td class="align-middle">
+                    <a class="btn btn-primary" href="">Bewerk</a>
+                </td>
+            </tr>
+        }
+    </table>
 
 
     </body>
+
+
+          <!--  <td class="align-middle embed-responsive embed-responsive-16by9">
+                   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/1Wzi6j1REWI" allowfullscreen=""></iframe>
+                </td> -->
