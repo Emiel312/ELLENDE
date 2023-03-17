@@ -3,11 +3,16 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PI4.Data;
 using Microsoft.EntityFrameworkCore;
 using PI4.Models;
+using PI4;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace PI4.Pages
 {
     public class OnderwerpenModel : PageModel
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public IEnumerable<Onderwerp> onderwerpen { get; set; } = null!;
         public string OmschrijvingSort { get; set; }
 
@@ -31,6 +36,23 @@ namespace PI4.Pages
                     onderwerpen = onderwerpen.OrderBy(s => s.Omschrijving).ToList();
                     break;
             }
+        }
+
+        [BindProperty]
+        public Onderwerp Onderw { get; set; }
+
+        public ActionResult OnPost()
+        {
+            if (string.IsNullOrWhiteSpace(Request.Form["Onderw.Omschrijving"]))
+                return RedirectToPage();
+
+        else
+        {
+                db.Onderwerpen.Add(Onderw);
+                db.SaveChanges();
+
+                return RedirectToPage();
+        }
         }
     }
 }
