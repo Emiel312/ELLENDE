@@ -32,5 +32,9 @@ namespace PI4.Pages
                     break;
             }
         }
+        public void OnDelete()
+        {
+
+        }
     }
 }

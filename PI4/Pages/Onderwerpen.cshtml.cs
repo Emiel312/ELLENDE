@@ -6,6 +6,7 @@ using PI4.Models;
 using PI4;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Data.Sqlite;
 
 namespace PI4.Pages
 {
@@ -53,6 +54,21 @@ namespace PI4.Pages
 
                 return RedirectToPage();
         }
+        }
+        [BindProperty(SupportsGet = true)]
+        public int Id { get; set; }
+
+        public async Task<IActionResult> OnPostDeleteAsync()
+        {
+            var invoer = await db.Onderwerpen.FindAsync(Id);
+
+            if (invoer != null)
+            {
+                db.Onderwerpen.Remove(invoer);
+                await db.SaveChangesAsync();
+            }
+
+            return RedirectToPage();
         }
     }
 }

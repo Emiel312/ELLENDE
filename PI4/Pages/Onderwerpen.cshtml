@@ -48,8 +48,8 @@
                     <td><a class="btn btn-primary" href="">Toon</a></td>
                     <td>
                         <!--Deze functionaliteit werkt nog niet-->
-                        <form method="post" action="/Onderwerpen?id=4&amp;handler=Delete">
-                            <button class="btn btn-danger">Verwijder</button>
+                        <form method="post" action="/Onderwerpen?id=@rij.OnderwerpId;handler=Delete">
+                            <button class="btn btn-danger" asp-route-id="@rij.OnderwerpId">Verwijder</button>
                             <input name="__RequestVerificationToken" type="hidden" value="CfDJ8KTO202ApS5OuPkATIKkwj_DYqA_CF4EZjBCGSmLgSY5zHCoNQ1AbYOhXKHAgHZgqEzx6vjtd07UV4BQnNf_z4QNFLJUyIbP9q5PRz4GDs74gLtuoTfqbI-pNNcjdvidePvU4bAUMU1qo1D0lqr75X8"></form></td>
                 </tr>
             }
