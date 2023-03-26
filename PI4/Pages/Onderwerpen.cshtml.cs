@@ -45,7 +45,7 @@ namespace PI4.Pages
         public ActionResult OnPost()
         {
             if (string.IsNullOrWhiteSpace(Request.Form["Onderw.Omschrijving"]))
-                return RedirectToPage();
+                return NotFound();
 
         else
         {
@@ -55,18 +55,19 @@ namespace PI4.Pages
                 return RedirectToPage();
         }
         }
-        [BindProperty(SupportsGet = true)]
-        public int Id { get; set; }
 
-        public async Task<IActionResult> OnPostDeleteAsync()
+        public async Task<IActionResult> OnGetDelete(int? id)
         {
-            var invoer = await db.Onderwerpen.FindAsync(Id);
-
-            if (invoer != null)
+            if (null == id)
             {
-                db.Onderwerpen.Remove(invoer);
-                await db.SaveChangesAsync();
+                return NotFound();
             }
+
+            var onderwerp = await db.Onderwerpen.FindAsync(id);
+
+            db.Onderwerpen.Remove(onderwerp);
+
+            await db.SaveChangesAsync();
 
             return RedirectToPage();
         }
