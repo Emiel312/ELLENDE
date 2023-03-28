@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PI4.Data;
 using Microsoft.EntityFrameworkCore;
 using PI4.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PI4.Pages
 {
@@ -17,6 +18,9 @@ namespace PI4.Pages
             db = injectedContext;
         }
 
+        [Required(ErrorMessage = "Veld mag niet leeg zijn.")]
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
         public void OnGet(string sortOrder)
         {
             videos = db.Videos.OrderBy(s => s.Titel).ToList();
@@ -31,10 +35,22 @@ namespace PI4.Pages
                     videos = videos.OrderBy(s => s.Titel).ToList();
                     break;
             }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                if (videos != null)
+                {
+                #pragma warning disable CS8602
+                    videos = videos.Where(v =>
+                    v.Titel.ToLower()
+                           .Contains(SearchString.ToLower())).ToList();
+                #pragma warning restore CS8602
+                }
+            }
         }
         public void OnDelete()
         {
 
         }
+
     }
 }

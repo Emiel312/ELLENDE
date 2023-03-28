@@ -1,5 +1,6 @@
-﻿@page "{handler?}/{id?}"
+﻿@page
 @model PI4.Pages.GefilterdModel
+@using PI4.Models
 @{
 }
 
@@ -20,6 +21,45 @@
 
     </header>
 
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1>Bijhorende video's bij onderwerp: "@Model.Onderwerp?.Omschrijving"</h1>
+                <br />
+            </div>
+        </div>
+    </div>
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Video Titel</th>
+                <th>Video Link</th>
+                <th></th>
+            </tr>
+        </thead>
 
+        <tbody>
+            @if (Model.Onderwerp?.Videos?.Any() ?? false)
+            {
+                @foreach (var rij in Model.Onderwerp.Videos ?? Enumerable.Empty<Video>())
+            
+                {
+                    <tr>
+                        <td class="align-middle">@rij.Titel</td>
+                        <td class="align-middle"><iframe allowfullscreen width="300" height="150" src="@rij.Link"></iframe></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr style="color:red">
+                    <td>Niks om weer te geven...</td>
+                    <td>Niks om weer te geven...</td>
+                </tr>
+            }
+            }
+        </tbody>
+    </table>
+        
 </body>

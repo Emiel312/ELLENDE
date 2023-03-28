@@ -1,4 +1,5 @@
-﻿@page "{handler?}/{id?}"
+﻿@page
+@using PI4.Models;
 @model PI4.Pages.DetailsModel
 @{
 }
@@ -19,4 +20,48 @@
         </nav>
 
     </header>
-    </body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div>
+                    <h1>Bijhorende onderwerpen bij video: "@Model.Video?.Titel"</h1>
+                    <br />
+                </div>
+                <div class="align-middle">
+                    <iframe allowfullscreen width="600" height="300" src="@Model.Video?.Link"></iframe>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Onderwerpen</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Video?.Onderwerpen?.Any() ?? false)
+            {
+                @foreach (var rij in Model.Video.Onderwerpen ?? Enumerable.Empty<Onderwerp>())
+                {
+                    <tr>
+                        <td class="align-middle">@rij.Omschrijving</td>
+                    </tr>
+                }
+
+            }
+            else
+            {
+                <tr style="color:red">
+                    <td>Niks om weer te geven...</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+ </body>

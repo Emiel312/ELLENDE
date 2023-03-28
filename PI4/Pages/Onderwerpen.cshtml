@@ -21,16 +21,17 @@
     </header>
 
     <div class="col text-center">
-            <h1> 🥋 Onderwerpen  🥋 </h1>
-            <form method="post">
-    <div class="form-group">
-                    <label for="Onderw_Omschrijving">Voeg nieuw Onderwerp toe </label>
-                    <input asp-for="Onderw.Omschrijving" type="text" data-val="true" data-val-required="Vul een nieuw onderwerp in." id="Onderw_Omschrijving" name="Onderw.Omschrijving" value="">                    
-                    <input class="btn btn-primary" type="submit" value="Sla op">
-                </div>
-            </form>
-        </div>
-    
+        <h1> 🥋 Onderwerpen  🥋 </h1>
+        <form method="post">
+            <td class="form-group">
+                <label for="Onderw_Omschrijving">Voeg nieuw Onderwerp toe </label>
+                <input asp-for="Onderw.Omschrijving" type="text" data-val="true" data-val-required="Vul een nieuw onderwerp in." id="Onderw_Omschrijving" name="Onderw.Omschrijving" />
+                <input class="btn btn-primary" type="submit" value="Sla op">
+            </td>
+            <td><span asp-validation-for="Onderw.Omschrijving" style="color:red"></span></td>
+        </form>
+    </div>
+
     </>
 
     <table class="table">

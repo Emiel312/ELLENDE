@@ -7,6 +7,7 @@ using PI4;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Data.Sqlite;
+using System.Threading.Tasks;
 
 namespace PI4.Pages
 {
@@ -39,22 +40,25 @@ namespace PI4.Pages
             }
         }
 
-        [BindProperty]
+        [BindProperty()]
         public Onderwerp Onderw { get; set; }
-
-        public ActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (string.IsNullOrWhiteSpace(Request.Form["Onderw.Omschrijving"]))
-                return NotFound();
-
-        else
-        {
+            //if (!ModelState.IsValid)
+            //    return Page();
+             if (string.IsNullOrWhiteSpace(Request.Form["Onderw.Omschrijving"]))
+                 return NotFound();
+            else
+            {
                 db.Onderwerpen.Add(Onderw);
                 db.SaveChanges();
 
                 return RedirectToPage();
+            }
         }
-        }
+
+
+
 
         public async Task<IActionResult> OnGetDelete(int? id)
         {
