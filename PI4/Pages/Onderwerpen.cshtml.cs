@@ -44,8 +44,6 @@ namespace PI4.Pages
         public Onderwerp Onderw { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (!ModelState.IsValid)
-            //    return Page();
              if (string.IsNullOrWhiteSpace(Request.Form["Onderw.Omschrijving"]))
                  return RedirectToPage();
             else
