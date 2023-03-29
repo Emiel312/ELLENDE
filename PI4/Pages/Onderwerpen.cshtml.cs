@@ -47,7 +47,7 @@ namespace PI4.Pages
             //if (!ModelState.IsValid)
             //    return Page();
              if (string.IsNullOrWhiteSpace(Request.Form["Onderw.Omschrijving"]))
-                 return NotFound();
+                 return RedirectToPage();
             else
             {
                 db.Onderwerpen.Add(Onderw);
