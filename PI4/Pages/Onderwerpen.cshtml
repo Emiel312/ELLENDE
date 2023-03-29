@@ -45,7 +45,7 @@
             {
                 <tr>
                     <td class="align-middle">@rij.Omschrijving</td>
-                    <td><a class="btn btn-primary" href="/Gefilterd">Toon</a></td>
+                    <td><a class="btn btn-primary" asp-page="/Gefilterd" asp-route-id="@rij.OnderwerpId">Toon</a></td>
                     <td><a class="btn btn-danger" asp-route-id="@rij.OnderwerpId" asp-page-handler="Delete">Verwijder</a></td>
                 </tr>
             }
